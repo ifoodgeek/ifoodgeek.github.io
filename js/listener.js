@@ -8,11 +8,13 @@ function clickAnswer(questionIdx, answerIdx) {
 	money += money_delta[questionIdx][answerIdx];
 	
 	if (user < 0) {
+		user = 0;
 		showOver(20);
 		return;
 	}
 	
 	if (money < 0) {
+		money = 0;
 		showOver(19);
 		return;
 	}
@@ -45,21 +47,36 @@ function showOver(ending_code) {
 	$("#page_init").css("display", "none");
 	$("#page_qa").css("display", "none");
 	$("#page_over").css("display", "block");
-	$(".swiper-container").css("background-color", "#000000");
 	
 	document.getElementById("over_jq").innerHTML = ending_desc[ending_code];
+	document.getElementById("over_num_user").innerHTML = user/10000;
+	document.getElementById("over_num_money").innerHTML = money/10000;
 	
 	if (ending_code == 17) {
-		document.getElementById('over_db_img').setAttribute('src','images/ok_db.png');
-		document.getElementById('over_again_img').setAttribute('src','images/ok_again.png');
+		// 卖掉结局
+		document.getElementById('over_title').setAttribute('src','images/over_cs.png');
+		document.getElementById('over_img').setAttribute('src','images/over_cs_img.png');
+		document.getElementById('over_mijiorcaidan_img').setAttribute('src','images/over_caidan.png');
+		$("#over_mijiorcaidan").click(function(){
+			window.location.href="https://mp.weixin.qq.com/s?__biz=MzIxNTEyMzkwMg==&mid=506298435&idx=1&sn=ae1ef15b83379ca4799cc8fbfdebb74c&pass_ticket=5ox89tah8%2FTkaETKCYyw6wTnCXySF9WqBMUxlh%2FlHCcxQbKL%2Fw4gnV1of2aTq27l#rd";
+		});
+	}
+	if (ending_code == 18) {
+		// 开出结局
+		document.getElementById('over_title').setAttribute('src','images/over_kc.png');
+		document.getElementById('over_img').setAttribute('src','images/over_kc_img.png');
+		document.getElementById('over_mijiorcaidan_img').setAttribute('src','images/over_caidan.png');
+		$("#over_mijiorcaidan").click(function(){
+			window.location.href="https://mp.weixin.qq.com/s?__biz=MzIxNTEyMzkwMg==&mid=506298435&idx=1&sn=ae1ef15b83379ca4799cc8fbfdebb74c&pass_ticket=5ox89tah8%2FTkaETKCYyw6wTnCXySF9WqBMUxlh%2FlHCcxQbKL%2Fw4gnV1of2aTq27l#rd";
+		});
 	}
 }
 
 function loadQA(questionNum) {
 	money += special_money_delta[questionNum];
 
-	document.getElementById("qa_num_user").innerHTML='用户数：'+user;
-	document.getElementById("qa_num_money").innerHTML='资金：'+money;
+	document.getElementById("qa_num_user").innerHTML = user/10000;
+	document.getElementById("qa_num_money").innerHTML = money/10000;
 	
 	var questions = question[questionNum];
 	document.getElementById("qa_q").innerHTML=questions;
@@ -84,19 +101,26 @@ $(document).ready(function(){
 		money = startMoney;
 		user = startUser;
 		condition = pure_condition.slice(0);
-		document.getElementById("qa_num_user").innerHTML='用户数：'+user;
-		document.getElementById("qa_num_money").innerHTML='资金：'+money;
+		document.getElementById("qa_num_user").innerHTML = user/10000;
+		document.getElementById("qa_num_money").innerHTML = money/10000;
 
-		document.getElementById('over_db_img').setAttribute('src','images/over_db.png');
+		document.getElementById('over_title').setAttribute('src','images/over_db.png');
+		document.getElementById('over_img').setAttribute('src','images/over_db_img.png');
 		document.getElementById('over_again_img').setAttribute('src','images/over_again.png');
+		document.getElementById('over_mijiorcaidan_img').setAttribute('src','images/over_miji.png');
+		
+		$("#over_mijiorcaidan").click(function(){
+			window.location.href="https://mp.weixin.qq.com/s?__biz=MzIxNTEyMzkwMg==&mid=506298432&idx=1&sn=6a4d27fb58e191f013465d13e5fb8d02&pass_ticket=5ox89tah8%2FTkaETKCYyw6wTnCXySF9WqBMUxlh%2FlHCcxQbKL%2Fw4gnV1of2aTq27l#rd";
+		});
+
 		
 		loadQA(0);
 	});
 	
 	
 
-	$("#qa_a_1").click(function(){
-		
+	$("#over_mijiorcaidan").click(function(){
+		window.location.href="https://mp.weixin.qq.com/s?__biz=MzIxNTEyMzkwMg==&mid=506298432&idx=1&sn=6a4d27fb58e191f013465d13e5fb8d02&pass_ticket=5ox89tah8%2FTkaETKCYyw6wTnCXySF9WqBMUxlh%2FlHCcxQbKL%2Fw4gnV1of2aTq27l#rd";
 	});
 
 	$("#qa_a_2").click(function(){
@@ -119,7 +143,6 @@ $(document).ready(function(){
 		$("#page_init").css("display", "block");
 		$("#page_qa").css("display", "none");
 		$("#page_over").css("display", "none");
-		$(".swiper-container").css("background-color", "#f8f35b");
 	});
 
 });
